@@ -7,31 +7,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f12a7f7-4341-466d-b12b-7511b11d254e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/CaroProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/config/RedisConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/RoomController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/dto/CreateRoomForm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/dto/RoomDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/dto/RoomsDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/model/RoomDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/repository/RoomRepo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/service/RoomService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/utils/utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../API specification.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../API specification.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/RoomController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/RoomController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/jwt/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/jwt/JwtAuthenticationFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/model/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/model/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/service/RoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/service/RoomService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CaroProject-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/CaroProject-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CaroProject-1.0-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/CaroProject-1.0-SNAPSHOT.jar.original" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/config/WebSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/RoomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/RoomController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/model/UserDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/model/UserDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/jwt/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/jwt/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/service/RoomService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/service/RoomService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +143,7 @@
       <workItem from="1576061461301" duration="92000" />
       <workItem from="1576061572994" duration="146000" />
       <workItem from="1576061741276" duration="6283000" />
-      <workItem from="1578407390734" duration="720000" />
+      <workItem from="1578407390734" duration="6480000" />
     </task>
     <servers />
   </component>
@@ -181,46 +176,62 @@
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="839" y="445" width="302" height="223" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/70.27.1850.1053@70.27.1850.1053" timestamp="1578407401872" />
-    <state width="1804" height="138" key="GridCell.Tab.0.bottom" timestamp="1578408092922">
+    <state width="900" height="314" key="GridCell.Tab.0.bottom" timestamp="1578421380318">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state width="1874" height="416" key="GridCell.Tab.0.bottom/1920.345.1920.1080/0.372.1920.708@0.372.1920.708" timestamp="1576068213709" />
-    <state width="1804" height="138" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1578408092922" />
-    <state width="1804" height="138" key="GridCell.Tab.0.center" timestamp="1578408092920">
+    <state width="900" height="314" key="GridCell.Tab.0.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380318" />
+    <state width="900" height="314" key="GridCell.Tab.0.center" timestamp="1578421380318">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state width="1874" height="416" key="GridCell.Tab.0.center/1920.345.1920.1080/0.372.1920.708@0.372.1920.708" timestamp="1576068213709" />
-    <state width="1804" height="138" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1578408092920" />
-    <state width="1804" height="138" key="GridCell.Tab.0.left" timestamp="1578408092918">
+    <state width="900" height="314" key="GridCell.Tab.0.center/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380318" />
+    <state width="900" height="314" key="GridCell.Tab.0.left" timestamp="1578421380317">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state width="1874" height="416" key="GridCell.Tab.0.left/1920.345.1920.1080/0.372.1920.708@0.372.1920.708" timestamp="1576068213709" />
-    <state width="1804" height="138" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1578408092918" />
-    <state width="1804" height="138" key="GridCell.Tab.0.right" timestamp="1578408092921">
+    <state width="900" height="314" key="GridCell.Tab.0.left/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380317" />
+    <state width="900" height="314" key="GridCell.Tab.0.right" timestamp="1578421380318">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state width="1874" height="416" key="GridCell.Tab.0.right/1920.345.1920.1080/0.372.1920.708@0.372.1920.708" timestamp="1576068213709" />
-    <state width="1804" height="138" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1578408092921" />
-    <state width="1804" height="138" key="GridCell.Tab.1.bottom" timestamp="1578408092927">
+    <state width="900" height="314" key="GridCell.Tab.0.right/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380318" />
+    <state width="900" height="314" key="GridCell.Tab.1.bottom" timestamp="1578421380319">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state width="1874" height="416" key="GridCell.Tab.1.bottom/1920.345.1920.1080/0.372.1920.708@0.372.1920.708" timestamp="1576068213710" />
-    <state width="1804" height="138" key="GridCell.Tab.1.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1578408092927" />
-    <state width="1804" height="138" key="GridCell.Tab.1.center" timestamp="1578408092925">
+    <state width="900" height="314" key="GridCell.Tab.1.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380319" />
+    <state width="900" height="314" key="GridCell.Tab.1.center" timestamp="1578421380319">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state width="1874" height="416" key="GridCell.Tab.1.center/1920.345.1920.1080/0.372.1920.708@0.372.1920.708" timestamp="1576068213710" />
-    <state width="1804" height="138" key="GridCell.Tab.1.center/70.27.1850.1053@70.27.1850.1053" timestamp="1578408092925" />
-    <state width="1804" height="138" key="GridCell.Tab.1.left" timestamp="1578408092924">
+    <state width="900" height="314" key="GridCell.Tab.1.center/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380319" />
+    <state width="900" height="314" key="GridCell.Tab.1.left" timestamp="1578421380318">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state width="1874" height="416" key="GridCell.Tab.1.left/1920.345.1920.1080/0.372.1920.708@0.372.1920.708" timestamp="1576068213709" />
-    <state width="1804" height="138" key="GridCell.Tab.1.left/70.27.1850.1053@70.27.1850.1053" timestamp="1578408092924" />
-    <state width="1804" height="138" key="GridCell.Tab.1.right" timestamp="1578408092926">
+    <state width="900" height="314" key="GridCell.Tab.1.left/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380318" />
+    <state width="900" height="314" key="GridCell.Tab.1.right" timestamp="1578421380319">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state width="1874" height="416" key="GridCell.Tab.1.right/1920.345.1920.1080/0.372.1920.708@0.372.1920.708" timestamp="1576068213710" />
-    <state width="1804" height="138" key="GridCell.Tab.1.right/70.27.1850.1053@70.27.1850.1053" timestamp="1578408092926" />
+    <state width="900" height="314" key="GridCell.Tab.1.right/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380319" />
+    <state width="900" height="314" key="GridCell.Tab.2.bottom" timestamp="1578421380320">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="900" height="314" key="GridCell.Tab.2.bottom/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380320" />
+    <state width="900" height="314" key="GridCell.Tab.2.center" timestamp="1578421380320">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="900" height="314" key="GridCell.Tab.2.center/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380320" />
+    <state width="900" height="314" key="GridCell.Tab.2.left" timestamp="1578421380320">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="900" height="314" key="GridCell.Tab.2.left/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380320" />
+    <state width="900" height="314" key="GridCell.Tab.2.right" timestamp="1578421380320">
+      <screen x="70" y="27" width="1850" height="1053" />
+    </state>
+    <state width="900" height="314" key="GridCell.Tab.2.right/70.27.1850.1053@70.27.1850.1053" timestamp="1578421380320" />
     <state x="825" y="27" width="976" height="1053" key="SettingsEditor" timestamp="1578408051713">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
@@ -236,10 +247,11 @@
       <screen x="0" y="372" width="1920" height="708" />
     </state>
     <state x="728" y="460" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/1920.345.1920.1080/0.372.1920.708@0.372.1920.708" timestamp="1575536833076" />
-    <state x="624" y="245" key="run.anything.popup" timestamp="1575538659034">
-      <screen x="0" y="372" width="1920" height="708" />
+    <state x="659" y="252" key="run.anything.popup" timestamp="1578415929649">
+      <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="624" y="245" key="run.anything.popup/1920.345.1920.1080/0.372.1920.708@0.372.1920.708" timestamp="1575538659034" />
+    <state x="659" y="252" key="run.anything.popup/70.27.1850.1053@70.27.1850.1053" timestamp="1578415929649" />
     <state x="623" y="239" width="672" height="678" key="search.everywhere.popup" timestamp="1576066475902">
       <screen x="0" y="372" width="1920" height="708" />
     </state>

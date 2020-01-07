@@ -37,12 +37,16 @@ public class UserService implements UserDetailsService {
     @Value("${number.avatar}")
     Integer nAva;
 
+    @Value("${init.points}")
+    private Integer initPoint;
+
     public Integer registerUser(SingInForm user) {
         UserDAO userDAO = !userRepo.findFirstByUsername(user.getUsername()).isPresent() ? new UserDAO(user.getUsername(), passwordEncoder.encode(user.getPassword()))
                 : null;
         if (userDAO == null)
             return USERNAME_EXISTED;
         userDAO.setRamdomAvatar(nAva);
+        userDAO.setPoints(initPoint);
         try {
             userRepo.save(userDAO);
         } catch (Exception e) {
@@ -72,11 +76,11 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public UserDTO getUserById(String id) {
-        UserDAO userDAO = userRepo.findById(id).orElse(null);
-        if (userDAO == null) return null;
-        return new UserDTO(userDAO);
-    }
+//    public UserDTO getUserById(String id) {
+//        UserDAO userDAO = userRepo.findById(id).orElse(null);
+//        if (userDAO == null) return null;
+//        return new UserDTO(userDAO);
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {

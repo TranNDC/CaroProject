@@ -58,14 +58,14 @@ public class UserController {
     }
 
     @GetMapping(value = "/api/users")
-    public ResponseEntity<?> login(@RequestParam String id){
-        UserDTO userDTO = userService.getUserById(id);
+    public ResponseEntity<?> getUser(@RequestParam String username){
+        UserDTO userDTO = userService.getUserByUsername(username);
 
         if (userDTO != null){
             return ResponseEntity.ok(userDTO);
         }
         else {
-            ErrorDTO errorDTO = new ErrorDTO("404","ID is not existed.");
+            ErrorDTO errorDTO = new ErrorDTO("404","Username is not existed.");
             return new ResponseEntity<>(errorDTO,HttpStatus.NOT_FOUND);
         }
     }

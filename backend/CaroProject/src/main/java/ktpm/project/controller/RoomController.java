@@ -30,7 +30,7 @@ public class RoomController {
             RoomDTO res = roomService.CreateNewRoom(req);
             return new ResponseEntity<>(res, HttpStatus.OK);
 
-        } catch (IllegalAccessException e){
+        } catch (IllegalArgumentException e){
             logger.info(e.getMessage());
             logger.info(e.toString());
             ErrorDTO errorDTO = new ErrorDTO("You don't have enough points.",e.getMessage());

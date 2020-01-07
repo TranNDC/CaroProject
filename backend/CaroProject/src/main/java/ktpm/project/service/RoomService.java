@@ -79,7 +79,6 @@ public class RoomService {
         ArrayList<RoomDTO> roomDTOS = new ArrayList<>();
         List<RoomDAO> rooms = (List<RoomDAO>) roomRepo.findAll();
 //        List<RoomDAO> rooms = (List<RoomDAO>) roomRepo.findAllByIsWaiting(true);
-        logger.error("SIZE:"+rooms.size());
         for (RoomDAO room :
                 rooms) {
             if (room.getIsWaiting()== true){
