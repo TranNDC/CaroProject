@@ -71,6 +71,13 @@ public class UserService implements UserDetailsService {
         return new UserDTO(userDAO);
     }
 
+
+    public UserDTO getUserById(String id) {
+        UserDAO userDAO = userRepo.findById(id).orElse(null);
+        if (userDAO == null) return null;
+        return new UserDTO(userDAO);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return getUserByUsername(s);

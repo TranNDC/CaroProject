@@ -56,4 +56,17 @@ public class UserController {
             return new ResponseEntity<>(errorDTO,HttpStatus.BAD_REQUEST);
         }
     }
+
+    @GetMapping(value = "/api/users")
+    public ResponseEntity<?> login(@RequestParam String id){
+        UserDTO userDTO = userService.getUserById(id);
+
+        if (userDTO != null){
+            return ResponseEntity.ok(userDTO);
+        }
+        else {
+            ErrorDTO errorDTO = new ErrorDTO("404","ID is not existed.");
+            return new ResponseEntity<>(errorDTO,HttpStatus.NOT_FOUND);
+        }
+    }
 }
