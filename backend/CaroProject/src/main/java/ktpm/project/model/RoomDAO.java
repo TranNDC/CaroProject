@@ -22,4 +22,6 @@ public class RoomDAO implements Serializable {
     Integer isWaiting;
     @Indexed
     String host;
+    @Indexed
+    String guest;
 }

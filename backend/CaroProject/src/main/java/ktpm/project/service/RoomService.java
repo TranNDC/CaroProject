@@ -2,6 +2,7 @@ package ktpm.project.service;
 
 import ktpm.project.dto.CreateRoomForm;
 import ktpm.project.dto.RoomsDTO;
+import ktpm.project.dto.UserDTO;
 import ktpm.project.model.RoomDAO;
 import ktpm.project.dto.RoomDTO;
 import ktpm.project.model.UserDAO;
@@ -46,8 +47,8 @@ public class RoomService {
     }
 
     public RoomDTO CreateNewRoom(CreateRoomForm roomDTO) throws Exception {
+        UserDAO host = userRepo.findFirstByUsername(roomDTO.getHost()).orElse(null);
         if (roomDTO.getBetPoint() != 0) {
-            UserDAO host = userRepo.findFirstByUsername(roomDTO.getHost()).orElse(null);
             if (host == null){
                 throw new Exception("Not found Username");
             }
@@ -70,17 +71,28 @@ public class RoomService {
         res.setBetPoint(roomDTO.getBetPoint());
         res.setRoomName(roomDTO.getRoomName());
         res.setHasPassword(!roomDTO.getPassword().equals(""));
-        res.setHost(roomDTO.getHost());
-        res.setGuest("");
+        res.setHost(new UserDTO(host));
+        res.setGuest(null);
         res.setBackground(utils.randomImage(nBackground));
         return res;
     }
 
     private RoomDTO toRoomDTO(RoomDAO room){
+        UserDAO host = userRepo.findFirstByUsername(room.getHost()).orElse(null);
+        UserDAO guest = userRepo.findFirstByUsername(room.getGuest()).orElse(null);
+
         RoomDTO roomDTO = new RoomDTO();
         roomDTO.setBetPoint(room.getBetPoint());
         roomDTO.setId(String.valueOf(room.getId()));
-        roomDTO.setHost(room.getHost());
+
+        if (host!=null)
+            roomDTO.setHost(new UserDTO(host));
+        else roomDTO.setHost(null);
+
+        if (guest!=null)
+            roomDTO.setGuest(new UserDTO(guest));
+        else roomDTO.setGuest(null);
+
         roomDTO.setRoomName(room.getName());
         roomDTO.setBetPoint(room.getBetPoint());
         roomDTO.setHasPassword(!room.getPassword().equals(""));
@@ -90,7 +102,6 @@ public class RoomService {
     public RoomsDTO getRooms(){
         ArrayList<RoomDTO> roomDTOS = new ArrayList<>();
         List<RoomDAO> rooms = (List<RoomDAO>) roomRepo.findAll();
-//        List<RoomDAO> rooms = (List<RoomDAO>) roomRepo.findAllByIsWaiting(true);
         for (RoomDAO room :
                 rooms) {
             if (room.getIsWaiting()==1){

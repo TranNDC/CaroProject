@@ -10,7 +10,7 @@ public class RoomDTO implements Serializable {
     String roomName;
     Integer betPoint;
     Boolean hasPassword;
-    String host;
-    String guest;
+    UserDTO host;
+    UserDTO guest;
     String background;
 }

@@ -46,7 +46,8 @@
 > POST /api/register
 
 - **REQUEST**
-    - BODY
+  - BODY
+
     ```json
     {
         "username": "abc",
@@ -55,13 +56,16 @@
     ```
 
 - **RESPONSE**
-    - 200
+  - 200
+
     ```json
     {
         "token": "abc.xyz.bbb"
     }
     ```
-    - 400
+
+  - 400
+
     ```json
     {
         "error":
@@ -71,15 +75,17 @@
         }
     }
     ```
+
 > GET /api/users?username=abc
+
 - **REQUEST**
-    - PARAMS
+  - PARAMS
 
     ```json
     username:abc
     ```
 
-    - HEADER
+  - HEADER
 
     ```json
     {
@@ -88,7 +94,8 @@
     ```
 
 - **RESPONSE**
-    - 200
+  - 200
+  - 
     ```json
     {
         "username": "abc",
@@ -99,7 +106,9 @@
         "avatar": "7"
     }
     ```
-    - 404
+
+  - 404
+
     ```json
     {
         "error": {
@@ -116,14 +125,15 @@
 ***Note :*** Create a room
 
 - **REQUEST**
+  - HEADER
 
-    - HEADER
     ```json
     {
         "Authentication": "Bearer abc.xyz.bbb"
     }
     ```
-    - BODY
+
+  - BODY
 
     ```json
     {
@@ -136,15 +146,30 @@
     ```
 
 - **RESPONSE**
-    - 200
+  - 200
+
     ```json
     {
         "id": "1",
         "roomName": "abc",
         "betPoints": 0,
         "hasPassword": false,
-        "host": "abc",
-        "guest": "",
+        "host": {
+            "username": "abc",
+            "avatar": 1,
+            "points": 10000,
+            "countWin": 100,
+            "countDraw": 10,
+            "countLose": 30
+        },
+        "guest": {
+            "username": "abc",
+            "avatar": 1,
+            "points": 10000,
+            "countWin": 100,
+            "countDraw": 10,
+            "countLose": 30
+        },
         "background": "5"
     }
     ```
@@ -200,8 +225,16 @@
         "roomName": "abc",
         "betPoints": 1000,
         "hasPassword": false,
-        "host": "abc",
-        "guest": "",
+        "host": 
+        {
+            "username": "abc",
+            "avatar": 1,
+            "points": 10000,
+            "countWin": 100,
+            "countDraw": 10,
+            "countLose": 30
+        },
+        "guest": null,
         "background": "5"
     }
     ```
@@ -271,7 +304,14 @@
                 "roomName": "abc",
                 "betPoints": 0,
                 "hasPassword": false,
-                "host": "Tran2",
+                "host": {
+                    "username": "abc",
+                    "avatar": 1,
+                    "points": 10000,
+                    "countWin": 100,
+                    "countDraw": 10,
+                    "countLose": 30
+                },
                 "guest": null,
                 "background": null
             },
@@ -312,4 +352,3 @@
         ...
     ]
     ```
-
