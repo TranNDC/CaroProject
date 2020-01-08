@@ -40,6 +40,9 @@ public class UserService implements UserDetailsService {
     @Value("${init.points}")
     private Integer initPoint;
 
+    @Autowired
+    RankService rankService;
+
     public Integer registerUser(SingInForm user) {
         UserDAO userDAO = !userRepo.findFirstByUsername(user.getUsername()).isPresent() ? new UserDAO(user.getUsername(), passwordEncoder.encode(user.getPassword()))
                 : null;
@@ -53,6 +56,7 @@ public class UserService implements UserDetailsService {
             logger.error(e.getMessage());
             return DTB_FAIL;
         }
+        rankService.AddToRank(user.getUsername());
         return SUCCESS;
     }
 
