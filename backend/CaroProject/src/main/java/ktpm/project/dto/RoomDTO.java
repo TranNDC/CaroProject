@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class RoomDTO implements Serializable {
-    Integer id;
+    String id;
     String roomName;
     Integer betPoint;
     Boolean hasPassword;

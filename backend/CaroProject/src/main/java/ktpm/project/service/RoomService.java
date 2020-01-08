@@ -19,6 +19,7 @@ import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RoomService {
@@ -62,17 +63,28 @@ public class RoomService {
         roomDAO.setPassword(password);
         roomDAO.setHost(roomDTO.getHost());
         roomDAO.setName(roomDTO.getRoomName());
-        roomDAO.setIsWaiting(true);
+        roomDAO.setIsWaiting(1);
         roomRepo.save(roomDAO);
         RoomDTO res = new RoomDTO();
-        res.setId(id);
+        res.setId(String.valueOf(id));
         res.setBetPoint(roomDTO.getBetPoint());
         res.setRoomName(roomDTO.getRoomName());
-        res.setHasPassword(roomDTO.getPassword()!="");
+        res.setHasPassword(!roomDTO.getPassword().equals(""));
         res.setHost(roomDTO.getHost());
         res.setGuest("");
         res.setBackground(utils.randomImage(nBackground));
         return res;
+    }
+
+    private RoomDTO toRoomDTO(RoomDAO room){
+        RoomDTO roomDTO = new RoomDTO();
+        roomDTO.setBetPoint(room.getBetPoint());
+        roomDTO.setId(String.valueOf(room.getId()));
+        roomDTO.setHost(room.getHost());
+        roomDTO.setRoomName(room.getName());
+        roomDTO.setBetPoint(room.getBetPoint());
+        roomDTO.setHasPassword(!room.getPassword().equals(""));
+        return roomDTO;
     }
 
     public RoomsDTO getRooms(){
@@ -81,14 +93,8 @@ public class RoomService {
 //        List<RoomDAO> rooms = (List<RoomDAO>) roomRepo.findAllByIsWaiting(true);
         for (RoomDAO room :
                 rooms) {
-            if (room.getIsWaiting()== true){
-                RoomDTO roomDTO = new RoomDTO();
-                roomDTO.setBetPoint(room.getBetPoint());
-                roomDTO.setId(room.getId());
-                roomDTO.setHost(room.getHost());
-                roomDTO.setRoomName(room.getName());
-                roomDTO.setBetPoint(room.getBetPoint());
-                roomDTO.setHasPassword(!room.getPassword().equals(""));
+            if (room.getIsWaiting()==1){
+                RoomDTO roomDTO = toRoomDTO(room);
                 roomDTOS.add(roomDTO);
             }
         }
@@ -98,4 +104,16 @@ public class RoomService {
     }
 
 
+    public RoomDTO findEmptyRoomById(int id) {
+        Optional<RoomDAO> room = roomRepo.findById(id);
+        if (!room.isPresent()) {
+            throw new NullPointerException("Invalid room ID!");
+        } else {
+            RoomDAO roomDAO = room.get();
+            if (roomDAO.getIsWaiting()!=1){
+                throw new IllegalArgumentException("Room is full!");
+            }
+            return toRoomDTO(roomDAO);
+        }
+    }
 }

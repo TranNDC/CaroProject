@@ -114,7 +114,9 @@
 > POST /api/room
 
 ***Note :*** Create a room
+
 - **REQUEST**
+
     - HEADER
     ```json
     {
@@ -137,7 +139,7 @@
     - 200
     ```json
     {
-        "id": 1,
+        "id": "1",
         "roomName": "abc",
         "betPoints": 0,
         "hasPassword": false,
@@ -146,7 +148,9 @@
         "background": "5"
     }
     ```
-    - 400
+
+  - 400
+  
     ```json
     {
         "error": {
@@ -155,7 +159,9 @@
         }
     }
     ```
-    - 403 Authentication is invalid
+
+  - 403 Authentication is invalid
+
     ```json
     {
         "timestamp": "2020-01-07T17:32:46.767+0000",
@@ -165,24 +171,29 @@
         "path": "/api/rooms"
     }
     ```
+
 > GET /api/room/search
 
 ***Note :*** Check whether a room ID is valid or not
+
 - **REQUEST**
-    - HEADER
+  - HEADER
+
     ```json
     {
         "Authentication": "Bearer abc.xyz.bbb"
     }
     ```
-    - PARAMS
-    ```
+
+  - PARAMS
+
+    ```json
         id: 8aaf253097
     ```
-    
 
 - **REPONSE**
-    - 200
+  - 200
+
     ```json
     {
         "id": 8aaf253097,
@@ -194,7 +205,9 @@
         "background": "5"
     }
     ```
+
     - 400
+
     ```json
     {
         "error": {
@@ -203,6 +216,7 @@
         }
     }
     ```
+
     ```json
     {
         "error": {
@@ -210,18 +224,22 @@
             "title": "Please pick another room ..."
         }
     }
-    ```    
+    ```
+
 >POST /api/room/join
 
 - **REQUEST**
-    - HEADER
+  - HEADER
+
     ```json
     {
         "Authentication": "Bearer abc.xyz.bbb"
     }
     ```
-    - BODY
-    ```
+
+  - BODY
+  
+    ```json
     {
         "id" : 8aaf253097,
         "password": 12345
@@ -230,14 +248,12 @@
 
 - **RESPONSE**
 
-
-    
-
 > GET /api/rooms
 
 ***Note :*** Get all rooms
+
 - **REQUEST**
-    - HEADER
+  - HEADER
 
     ```json
     {
@@ -246,11 +262,12 @@
     ```
 
 - **RESPONSE**
-    - 200
+  - 200
+
     ```json
     "rooms": [
             {
-                "id": 1,
+                "id": "1",
                 "roomName": "abc",
                 "betPoints": 0,
                 "hasPassword": false,
@@ -262,12 +279,16 @@
         ]
     }
     ```
+
 ### **RANK API**
-> GET /api/rank 
+
+> GET /api/rank
 
 ***Note :*** Get top 5 highest rank users
+
 - **REQUEST**
-    - HEADER
+  - HEADER
+
 
     ```json
     {
@@ -276,9 +297,10 @@
     ```
 
 - **RESPONSE**
-    - 200
+  - 200
+
     ```json
-    [
+    "ranking": [
         {
             "username": "abc",
             "points" : 10000
