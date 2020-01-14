@@ -25,6 +25,10 @@ public class SocketService {
             response.setCode(400);
             ErrorDTO errorDTO = new ErrorDTO("You don't have enough points.",e.getMessage());
             response.setError(errorDTO);
+        } catch (IllegalAccessException e){
+            response.setCode(400);
+            ErrorDTO errorDTO = new ErrorDTO(e.getMessage(),"Please check your input again.");
+            response.setError(errorDTO);
         } catch (ClassNotFoundException e){
             response.setCode(400);
             ErrorDTO errorDTO = new ErrorDTO("Room's not available!.",e.getMessage());

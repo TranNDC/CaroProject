@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -171,6 +172,11 @@ public class RoomService {
         ChangeMode(joinFormDTO.getRoomId(),WAITING);
         RoomDAO room = roomRepo.findById(Integer.valueOf(joinFormDTO.getRoomId())).orElse(null);
         CheckCanJoin(room,joinFormDTO.getUsername());
+        if (!room.getPassword().equals("")) {
+            if (!passwordEncoder.matches(room.getPassword(),joinFormDTO.getPassword())){
+                throw new IllegalAccessException("Password is incorrect");
+            }
+        }
         room.setGuest(joinFormDTO.getUsername());
         room.setGuestPoints(0);
         room.setGuestReady(1);
@@ -232,10 +238,8 @@ public class RoomService {
             room = ChangeHost(room);
         }
 
+        room.setGuest(null);
         roomRepo.save(room);
-
-
-
         return toRoomDTO(room);
 
     }
@@ -249,7 +253,9 @@ public class RoomService {
     private void HandleResult(RoomDAO room, String username, String result) {
         UserDAO guest = userRepo.findFirstByUsername(room.getGuest()).orElse(null);
         UserDAO host = userRepo.findFirstByUsername(room.getHost()).orElse(null);
-        if (result == DRAW){
+        logger.info("GUEST ",guest.getUsername(),guest.getPoints());
+        logger.info("HOST ",host.getUsername(),host.getPoints());
+        if (result.equals(DRAW)){
             guest.setDrawCount(guest.getDrawCount()+1);
             host.setDrawCount(host.getDrawCount()+1);
             guest.setPoints(guest.getPoints()+DRAW_POINTS);
@@ -263,6 +269,10 @@ public class RoomService {
                     : !guest.getUsername().equals(username) ?host:guest;
             winner.setPoints(winner.getPoints()+WIN_POINTS+room.getBetPoint());
             loser.setPoints(winner.getPoints()+LOSE_POINTS-room.getBetPoint());
+
+            logger.info("WINNER ",winner.getUsername(),winner.getPoints());
+            logger.info("LOSER ",loser.getUsername(),loser.getPoints());
+
             winner.setWinCount(winner.getWinCount()+1);
             winner.setLoseCount(winner.getLoseCount()+1);
             userRepo.save(winner);
