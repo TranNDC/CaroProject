@@ -1,13 +1,11 @@
 package ktpm.project.model;
 
-import ktpm.project.utils.utils;
+import ktpm.project.utils.Utils;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.beans.factory.annotation.Value;
-import java.util.Random;
 
 @Getter
 @Setter
@@ -35,6 +33,6 @@ public class UserDAO {
     }
 
     public void setRamdomAvatar(Integer nAva) {
-        avatar = utils.randomImage(nAva);
+        avatar = Utils.randomImage(nAva);
     }
 }

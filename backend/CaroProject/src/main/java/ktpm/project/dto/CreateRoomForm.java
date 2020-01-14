@@ -9,6 +9,5 @@ public class CreateRoomForm implements Serializable {
     String roomName;
     Integer betPoint;
     String password;
-    String host;
-    String background;
+    String username;
 }

@@ -1,5 +1,7 @@
 package ktpm.project.config;
 
+import ktpm.project.controller.http.UserController;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -12,6 +14,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 @Configuration
 public class RedisConfig {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Value("${spring.redis.host}")
     private String redisHost;
 

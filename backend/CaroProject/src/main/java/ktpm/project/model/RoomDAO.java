@@ -19,9 +19,14 @@ public class RoomDAO implements Serializable {
     String name;
     String password;
     Integer betPoint;
-    Integer isWaiting;
+    Integer mode;
+    Integer guestPoints;
+    Integer hostPoints;
+    Integer isHostPlayFirst;
     @Indexed
     String host;
     @Indexed
     String guest;
+    Integer guestReady;
+    Integer hostReady;
 }

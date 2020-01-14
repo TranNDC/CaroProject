@@ -1,22 +1,17 @@
 package ktpm.project.service;
 
-import ktpm.project.dto.CreateRoomForm;
-import ktpm.project.dto.RoomsDTO;
-import ktpm.project.dto.UserDTO;
+import ktpm.project.dto.*;
 import ktpm.project.model.RoomDAO;
-import ktpm.project.dto.RoomDTO;
 import ktpm.project.model.UserDAO;
 import ktpm.project.repository.RoomRepo;
 import ktpm.project.repository.UserRepo;
-import ktpm.project.utils.utils;
+import ktpm.project.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +19,12 @@ import java.util.Optional;
 
 @Service
 public class RoomService {
+    static final int FREE = 0;
+    static final int WAITING = 1;
+    static final int PLAYING = 2;
+    private static final String LOSE = "lose";
+    private static final String WIN = "win";
+    private static final String DRAW = "draw";
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -39,6 +40,15 @@ public class RoomService {
     @Value("${number.background}")
     Integer nBackground;
 
+    @Value("${win.points}")
+    Integer WIN_POINTS;
+
+    @Value("${lose.points}")
+    Integer LOSE_POINTS;
+
+    @Value("${draw.points}")
+    Integer DRAW_POINTS;
+
     static Integer roomID = 0;
 
     synchronized Integer getRoomID() {
@@ -46,9 +56,26 @@ public class RoomService {
         return  roomID;
     }
 
+    private void CheckCanJoin(RoomDAO room, String username) throws Exception{
+        if (room == null|| room.getHost()==null){
+            throw new ClassNotFoundException("Not found room");
+        }
+        if (room.getGuest()!=null){
+            throw new ClassNotFoundException("Room's full");
+        }
+        UserDAO userDAO = userRepo.findFirstByUsername(username).orElse(null);
+        if (userDAO==null){
+            throw new Exception("Not found user");
+        }
+        if (userDAO.getPoints() < room.getBetPoint()){
+            throw new IllegalArgumentException("Make sure your points >= "+room.getBetPoint());
+        }
+    }
+
     public RoomDTO CreateNewRoom(CreateRoomForm roomDTO) throws Exception {
-        UserDAO host = userRepo.findFirstByUsername(roomDTO.getHost()).orElse(null);
-        if (roomDTO.getBetPoint() != 0) {
+        logger.warn(String.valueOf(roomDTO));
+        UserDAO host = userRepo.findFirstByUsername(roomDTO.getUsername()).orElse(null);
+        if (roomDTO.getBetPoint() != null && roomDTO.getBetPoint() != 0) {
             if (host == null){
                 throw new Exception("Not found Username");
             }
@@ -59,21 +86,28 @@ public class RoomService {
         Integer id = getRoomID();
         RoomDAO roomDAO = new RoomDAO();
         roomDAO.setId(id);
-        roomDAO.setBetPoint(roomDTO.getBetPoint());
-        String password = (roomDTO.getPassword()==null || roomDTO.getPassword().length() != 0 )? passwordEncoder.encode(roomDTO.getPassword()) : "";
+        Integer betPoints = roomDTO.getBetPoint()!=null?roomDTO.getBetPoint():0;
+        roomDAO.setBetPoint(betPoints);
+        String password = (roomDTO.getPassword()!=null && roomDTO.getPassword().length() != 0 )? passwordEncoder.encode(roomDTO.getPassword()) : "";
         roomDAO.setPassword(password);
-        roomDAO.setHost(roomDTO.getHost());
+        roomDAO.setHost(roomDTO.getUsername());
         roomDAO.setName(roomDTO.getRoomName());
-        roomDAO.setIsWaiting(1);
+        roomDAO.setMode(FREE);
+        roomDAO.setGuestPoints(0);
+        roomDAO.setIsHostPlayFirst(1);
+        roomDAO.setGuestReady(0);
+        roomDAO.setHostReady(1);
         roomRepo.save(roomDAO);
         RoomDTO res = new RoomDTO();
         res.setId(String.valueOf(id));
         res.setBetPoint(roomDTO.getBetPoint());
         res.setRoomName(roomDTO.getRoomName());
-        res.setHasPassword(!roomDTO.getPassword().equals(""));
+        res.setHasPassword(roomDTO.getPassword()!=null&&!roomDTO.getPassword().equals(""));
         res.setHost(new UserDTO(host));
         res.setGuest(null);
-        res.setBackground(utils.randomImage(nBackground));
+        res.setGuestReady(false);
+        res.setHostReady(true);
+        res.setBackground(Utils.randomImage(nBackground));
         return res;
     }
 
@@ -96,6 +130,11 @@ public class RoomService {
         roomDTO.setRoomName(room.getName());
         roomDTO.setBetPoint(room.getBetPoint());
         roomDTO.setHasPassword(!room.getPassword().equals(""));
+        roomDTO.setGuestPoint(room.getGuestPoints());
+        roomDTO.setHostPoint(room.getHostPoints());
+        roomDTO.setIsHostPlayFirst(room.getIsHostPlayFirst()==1);
+        roomDTO.setGuestReady(room.getGuestReady()==1);
+        roomDTO.setHostReady(room.getHostReady()==1);
         return roomDTO;
     }
 
@@ -104,7 +143,7 @@ public class RoomService {
         List<RoomDAO> rooms = (List<RoomDAO>) roomRepo.findAll();
         for (RoomDAO room :
                 rooms) {
-            if (room.getIsWaiting()==1){
+            if (room.getMode()==FREE){
                 RoomDTO roomDTO = toRoomDTO(room);
                 roomDTOS.add(roomDTO);
             }
@@ -121,10 +160,117 @@ public class RoomService {
             throw new NullPointerException("Invalid room ID!");
         } else {
             RoomDAO roomDAO = room.get();
-            if (roomDAO.getIsWaiting()!=1){
+            if (roomDAO.getMode()!=FREE){
                 throw new IllegalArgumentException("Room is full!");
             }
             return toRoomDTO(roomDAO);
         }
+    }
+
+    public RoomDTO JoinRoom(JoinFormDTO joinFormDTO) throws Exception {
+        ChangeMode(joinFormDTO.getRoomId(),WAITING);
+        RoomDAO room = roomRepo.findById(Integer.valueOf(joinFormDTO.getRoomId())).orElse(null);
+        CheckCanJoin(room,joinFormDTO.getUsername());
+        room.setGuest(joinFormDTO.getUsername());
+        room.setGuestPoints(0);
+        room.setGuestReady(1);
+        roomRepo.save(room);
+        return toRoomDTO(room);
+    }
+
+    public void ChangeMode(String roomId, int mode) throws Exception {
+        if (!isAvaibleMode(mode))
+            return;
+        RoomDAO roomDAO = roomRepo.findById(Integer.valueOf(roomId)).orElse(null);
+        if (roomDAO!=null){
+            roomDAO.setMode(mode);
+        } else {
+            throw new ClassNotFoundException("Not found room");
+        }
+        roomRepo.save(roomDAO);
+    }
+
+    private boolean isAvaibleMode(int mode) {
+        return mode>=0 && mode<=2;
+    }
+
+    private RoomDAO ChangeHost(RoomDAO room){
+        if (room.getHost()==null){
+            room.setHost(room.getGuest());
+            room.setHostPoints(0);
+            room.setHostReady(1);
+            room.setGuest("");
+            room.setGuestReady(0);
+            room.setGuestPoints(0);
+            room.setIsHostPlayFirst(1);
+            room.setMode(FREE);
+        }
+        return room;
+    }
+
+    public RoomDTO Continue(String roomId, String username) throws Exception {
+        RoomDAO room = roomRepo.findById(Integer.valueOf(roomId)).orElse(null);
+        CheckCanJoin(room,username);
+        ChangeHost(room);
+
+        room = roomRepo.save(room);
+        return toRoomDTO(room);
+    }
+
+
+
+    public RoomDTO Exit(String roomID, String username) {
+        RoomDAO room = roomRepo.findById(Integer.valueOf(roomID)).orElse(null);
+        if (IsPlayingRoom(room)){
+            HandleResult(room,username,LOSE);
+        }
+
+        if (room==null) return null;
+        room.setMode(FREE);
+
+        if (room.getHost() == username){
+            room = ChangeHost(room);
+        }
+
+        roomRepo.save(room);
+
+
+
+        return toRoomDTO(room);
+
+    }
+
+    public void HandleResult(String roomID, String username, String result) {
+        RoomDAO room = roomRepo.findById(Integer.valueOf(roomID)).orElse(null);
+        if (room == null) return;
+        HandleResult(room,username,result);
+    }
+
+    private void HandleResult(RoomDAO room, String username, String result) {
+        UserDAO guest = userRepo.findFirstByUsername(room.getGuest()).orElse(null);
+        UserDAO host = userRepo.findFirstByUsername(room.getHost()).orElse(null);
+        if (result == DRAW){
+            guest.setDrawCount(guest.getDrawCount()+1);
+            host.setDrawCount(host.getDrawCount()+1);
+            guest.setPoints(guest.getPoints()+DRAW_POINTS);
+            host.setPoints(host.getPoints()+DRAW_POINTS);
+            userRepo.save(guest);
+            userRepo.save(host);
+        }else {
+            UserDAO winner = (result.equals(WIN))? guest.getUsername().equals(username) ?guest:host
+                    : guest.getUsername().equals(username) ?host:guest;
+            UserDAO loser = (result.equals(WIN))? !guest.getUsername().equals(username) ?guest:host
+                    : !guest.getUsername().equals(username) ?host:guest;
+            winner.setPoints(winner.getPoints()+WIN_POINTS+room.getBetPoint());
+            loser.setPoints(winner.getPoints()+LOSE_POINTS-room.getBetPoint());
+            winner.setWinCount(winner.getWinCount()+1);
+            winner.setLoseCount(winner.getLoseCount()+1);
+            userRepo.save(winner);
+            userRepo.save(loser);
+        }
+    }
+
+    public boolean IsPlayingRoom(RoomDAO room) {
+        return room.getMode() == PLAYING;
     }
 }
