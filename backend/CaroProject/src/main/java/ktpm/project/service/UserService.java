@@ -3,6 +3,7 @@ package ktpm.project.service;
 import ktpm.project.dto.SingInForm;
 import ktpm.project.dto.UserDTO;
 import ktpm.project.model.UserDAO;
+import ktpm.project.repository.RankRepo;
 import ktpm.project.repository.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,9 @@ public class UserService implements UserDetailsService {
     UserRepo userRepo;
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    RankRepo rankRepo;
 
     @Value("${number.avatar}")
     Integer nAva;
@@ -66,7 +70,7 @@ public class UserService implements UserDetailsService {
             return Arrays.asList(USERNAME_NOT_EXISTED);
 
         if (passwordEncoder.matches(user.getPassword(),userDAO.getPassword())){
-            return Arrays.asList(SUCCESS,new UserDTO(userDAO));
+            return Arrays.asList(SUCCESS,new UserDTO(userDAO,rankRepo.getRankByUsername(user.getUsername())));
         }
         else{
             return Arrays.asList(PASSWORD_INCORRECT);
@@ -76,7 +80,7 @@ public class UserService implements UserDetailsService {
     public UserDTO getUserByUsername(String username) {
         UserDAO userDAO = userRepo.findFirstByUsername(username).orElse(null);
         if (userDAO == null) return null;
-        return new UserDTO(userDAO);
+        return new UserDTO(userDAO,rankRepo.getRankByUsername(username));
     }
 
 
