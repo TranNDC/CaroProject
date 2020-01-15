@@ -14,6 +14,9 @@ public class SocketService {
     @Autowired
     RoomService roomService;
 
+    @Autowired
+    RankService rankService;
+
     public JoinResDTO HandleJoinRoom(JoinFormDTO joinFormDTO) {
         JoinResDTO response = new JoinResDTO();
         try{
@@ -100,5 +103,13 @@ public class SocketService {
 
     public void HandleResult(String roomId, String username, String result) {
         roomService.HandleResult(roomId,username,result);
+    }
+
+    public RoomsDTO getRooms() {
+        return roomService.getRooms();
+    }
+
+    public  RankingDTO getRank(){
+        return rankService.getRanking();
     }
 }

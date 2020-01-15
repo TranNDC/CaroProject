@@ -11,12 +11,13 @@ import ktpm.project.service.SocketService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 public class SocketController {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -104,11 +105,25 @@ public class SocketController {
         return roomName.substring(1);
     }
 
+    private void sendRoomsDTO(SocketIOClient client){
+        RoomsDTO roomsDTO = socketService.getRooms();
+        client.sendEvent("listen-inteval-room",roomsDTO);
+    }
+
+    private void sendRankingDTO(SocketIOClient client){
+        RankingDTO rankingDTO = socketService.getRank();
+        client.sendEvent("listen-inteval-rank",rankingDTO);
+    }
+
+
     private void addConnect() {
         socketServer.addConnectListener(new ConnectListener() {
             @Override
             public void onConnect(SocketIOClient socketIOClient) {
                 logger.info("CONNECT",socketIOClient.getSessionId());
+                ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
+                executor.scheduleAtFixedRate(() -> sendRoomsDTO(socketIOClient), 10, 15, TimeUnit.SECONDS);
+                executor.scheduleAtFixedRate(() -> sendRankingDTO(socketIOClient), 10, 15, TimeUnit.SECONDS);
             }
         });
     }

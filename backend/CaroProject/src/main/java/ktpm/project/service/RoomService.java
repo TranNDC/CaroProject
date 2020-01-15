@@ -3,6 +3,7 @@ package ktpm.project.service;
 import ktpm.project.dto.*;
 import ktpm.project.model.RoomDAO;
 import ktpm.project.model.UserDAO;
+import ktpm.project.repository.RankRepo;
 import ktpm.project.repository.RoomRepo;
 import ktpm.project.repository.UserRepo;
 import ktpm.project.utils.Utils;
@@ -32,6 +33,9 @@ public class RoomService {
 
     @Autowired
     RoomRepo roomRepo;
+
+    @Autowired
+    RankRepo rankRepo;
 
     @Autowired
     UserRepo userRepo;
@@ -278,6 +282,8 @@ public class RoomService {
             userRepo.save(winner);
             userRepo.save(loser);
         }
+        rankRepo.save(guest);
+        rankRepo.save(host);
     }
 
     public boolean IsPlayingRoom(RoomDAO room) {
