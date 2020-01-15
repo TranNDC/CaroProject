@@ -17,7 +17,6 @@ import java.util.*;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @Controller
 public class SocketController {
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserController.class);
