@@ -7,10 +7,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f12a7f7-4341-466d-b12b-7511b11d254e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/http/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/http/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/dto/ErrorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/dto/ErrorDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CaroProject.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/dto/UserDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/dto/UserDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/service/RoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/service/RoomService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/Application$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/Application$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/Application.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/config/SocketConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/config/SocketConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/http/RoomController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/http/RoomController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/http/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/http/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/dto/AuthenticationDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/dto/AuthenticationDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/dto/CreateRoomForm.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/dto/CreateRoomForm.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/dto/RoomDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/dto/RoomDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/dto/UserDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/dto/UserDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/jwt/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/jwt/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/jwt/JwtUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/jwt/JwtUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/repository/RankRepo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/repository/RankRepo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/service/RankService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/service/RankService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/service/RoomService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/service/RoomService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/service/SocketService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/service/SocketService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/service/UserService.class" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -86,6 +111,18 @@
       <recent name="ktpm.project.dto" />
     </key>
   </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="CaroProject" />
@@ -94,18 +131,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -145,6 +170,7 @@
       <workItem from="1579010871046" duration="11339000" />
       <workItem from="1579060924012" duration="6359000" />
       <workItem from="1579104916283" duration="122000" />
+      <workItem from="1579106510665" duration="1345000" />
     </task>
     <servers />
   </component>

@@ -18,13 +18,15 @@ public class UserDTO implements UserDetails {
     Integer loseCount;
     Integer drawCount;
     Integer points;
+    Integer rank;
     String avatar;
 
-    public UserDTO(UserDAO userDAO) {
+    public UserDTO(UserDAO userDAO, long _rank) {
         username = userDAO.getUsername();
         winCount = userDAO.getWinCount();
         loseCount = userDAO.getLoseCount();
         drawCount = userDAO.getDrawCount();
+        rank = Math.toIntExact(_rank);
         points = userDAO.getPoints();
         avatar = userDAO.getAvatar();
     }

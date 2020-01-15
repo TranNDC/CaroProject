@@ -107,7 +107,7 @@ public class RoomService {
         res.setBetPoint(roomDTO.getBetPoint());
         res.setRoomName(roomDTO.getRoomName());
         res.setHasPassword(roomDTO.getPassword()!=null&&!roomDTO.getPassword().equals(""));
-        res.setHost(new UserDTO(host));
+        res.setHost(new UserDTO(host,rankRepo.getRankByUsername(host.getUsername())));
         res.setGuest(null);
         res.setGuestReady(false);
         res.setHostReady(true);
@@ -124,11 +124,11 @@ public class RoomService {
         roomDTO.setId(String.valueOf(room.getId()));
 
         if (host!=null)
-            roomDTO.setHost(new UserDTO(host));
+            roomDTO.setHost(new UserDTO(host,rankRepo.getRankByUsername(host.getUsername())));
         else roomDTO.setHost(null);
 
         if (guest!=null)
-            roomDTO.setGuest(new UserDTO(guest));
+            roomDTO.setGuest(new UserDTO(guest,rankRepo.getRankByUsername(guest.getUsername())));
         else roomDTO.setGuest(null);
 
         roomDTO.setRoomName(room.getName());
