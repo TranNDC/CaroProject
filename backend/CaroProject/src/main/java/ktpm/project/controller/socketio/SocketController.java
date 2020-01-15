@@ -30,6 +30,7 @@ public class SocketController {
         socketServer = socketConfig.getSocketServer();
     }
     public void StartSocket(){
+        socketService.initRedisData();
         addConnect();
         addDisconnect();
         addSendMessage();
@@ -106,12 +107,12 @@ public class SocketController {
 
     private void sendRoomsDTO(SocketIOClient client){
         RoomsDTO roomsDTO = socketService.getRooms();
-        client.sendEvent("listen-inteval-room",roomsDTO);
+        client.sendEvent("listen-interval-rooms",roomsDTO);
     }
 
     private void sendRankingDTO(SocketIOClient client){
         RankingDTO rankingDTO = socketService.getRank();
-        client.sendEvent("listen-inteval-rank",rankingDTO);
+        client.sendEvent("listen-interval-rank",rankingDTO);
     }
 
 

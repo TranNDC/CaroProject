@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -205,7 +204,8 @@ public class RoomService {
     }
 
     private RoomDAO ChangeHost(RoomDAO room){
-        if (room.getHost()==null){
+        logger.info("Change host in room "+ roomID);
+        if (room.getHost()!=null){
             room.setHost(room.getGuest());
             room.setHostPoints(0);
             room.setHostReady(1);
@@ -227,23 +227,31 @@ public class RoomService {
         return toRoomDTO(room);
     }
 
-
+    private boolean isNotAvailable(String name){
+        return name==null || name.equals("");
+    }
 
     public RoomDTO Exit(String roomID, String username) {
+        logger.info(username + " EXIT in room "+ roomID);
         RoomDAO room = roomRepo.findById(Integer.valueOf(roomID)).orElse(null);
+        if (room==null) return null;
         if (IsPlayingRoom(room)){
             HandleResult(room,username,LOSE);
         }
 
-        if (room==null) return null;
         room.setMode(FREE);
 
-        if (room.getHost() == username){
+        if (room.getHost().equals(username)){
             room = ChangeHost(room);
         }
 
         room.setGuest(null);
-        roomRepo.save(room);
+        if (isNotAvailable(room.getHost()) && isNotAvailable(room.getGuest())){
+            logger.info("DELETE ROOM");
+            roomRepo.delete(room);
+        } else {
+            roomRepo.save(room);
+        }
         return toRoomDTO(room);
 
     }
@@ -255,10 +263,9 @@ public class RoomService {
     }
 
     private void HandleResult(RoomDAO room, String username, String result) {
+        logger.info("HANDLE RESULT");
         UserDAO guest = userRepo.findFirstByUsername(room.getGuest()).orElse(null);
         UserDAO host = userRepo.findFirstByUsername(room.getHost()).orElse(null);
-        logger.info("GUEST ",guest.getUsername(),guest.getPoints());
-        logger.info("HOST ",host.getUsername(),host.getPoints());
         if (result.equals(DRAW)){
             guest.setDrawCount(guest.getDrawCount()+1);
             host.setDrawCount(host.getDrawCount()+1);
@@ -273,9 +280,6 @@ public class RoomService {
                     : !guest.getUsername().equals(username) ?host:guest;
             winner.setPoints(winner.getPoints()+WIN_POINTS+room.getBetPoint());
             loser.setPoints(winner.getPoints()+LOSE_POINTS-room.getBetPoint());
-
-            logger.info("WINNER ",winner.getUsername(),winner.getPoints());
-            logger.info("LOSER ",loser.getUsername(),loser.getPoints());
 
             winner.setWinCount(winner.getWinCount()+1);
             winner.setLoseCount(winner.getLoseCount()+1);

@@ -112,4 +112,8 @@ public class SocketService {
     public  RankingDTO getRank(){
         return rankService.getRanking();
     }
+
+    public void initRedisData() {
+        rankService.reloadRanking();
+    }
 }

@@ -286,6 +286,53 @@ class SocketDTO{
 }
 ```
 
+### [INTERVAL] get Rooms list
+
+- Listen in: `listen-interval-rooms`
+- Data:
+
+```json
+    "rooms": [
+            {
+                "id": "1",
+                "roomName": "abc",
+                "betPoints": 0,
+                "hasPassword": false,
+                "host": {
+                    "username": "abc",
+                    "avatar": 1,
+                    "points": 10000,
+                    "countWin": 100,
+                    "countDraw": 10,
+                    "countLose": 30
+                },
+                "guest": null,
+                "background": null
+            },
+            ...
+        ]
+    }
+```
+
+### [INTERVAL] get ranking
+
+- Listen in `listen-interval-rank`
+- Data:
+
+```json
+"ranking": [
+    {
+        "username": "abc",
+        "points" : 10000
+    },
+    {
+        "username" : "cde",
+        "points" : 9500
+    },
+    ...
+]
+```
+
 ### Create room
 
 - API name: `create`
