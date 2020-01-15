@@ -33,6 +33,7 @@ public class UserController {
         }
         else if (res.equals(UserService.USERNAME_EXISTED)){
             ErrorDTO errorDTO = new ErrorDTO("Register Fail", "Username existed");
+//            return ResponseEntity.badRequest(errorDTO)
             return new ResponseEntity<>(errorDTO,HttpStatus.BAD_REQUEST);
         }
         else if (res.equals(UserService.DTB_FAIL)){

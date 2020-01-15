@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-class Error{
+class Error implements Serializable{
     String detail;
     String title;
 }

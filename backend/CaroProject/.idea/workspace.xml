@@ -8,24 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9f12a7f7-4341-466d-b12b-7511b11d254e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socketio.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socketio.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/socketio/SocketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/socketio/SocketController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/service/RoomService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/service/RoomService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/service/SocketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/service/SocketService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/config/WebSecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/controller/socketio/SocketController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/service/RoomService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/service/RoomService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ktpm/project/service/SocketService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ktpm/project/service/SocketService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/http/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/controller/http/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ktpm/project/dto/ErrorDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ktpm/project/dto/ErrorDTO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -160,6 +144,7 @@
       <workItem from="1578990879881" duration="11229000" />
       <workItem from="1579010871046" duration="11339000" />
       <workItem from="1579060924012" duration="6359000" />
+      <workItem from="1579104916283" duration="122000" />
     </task>
     <servers />
   </component>
