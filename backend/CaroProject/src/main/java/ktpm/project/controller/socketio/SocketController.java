@@ -50,7 +50,6 @@ public class SocketController {
                 JoinResDTO joinResDTO = socketService.HandleCreateRoom(createRoomForm);
                 if (joinResDTO.getCode()==200){
                     socketIOClient.joinRoom(getRoomName(joinResDTO.getRoom().getId()));
-                    logger.warn("JOIN ROOM: ",socketIOClient.getSessionId().toString(),getRoomName(joinResDTO.getRoom().getId()));
                     sessions.put(socketIOClient.getSessionId(),createRoomForm.getUsername());
                 }
                 socketIOClient.sendEvent("listen-create",joinResDTO);
@@ -87,7 +86,6 @@ public class SocketController {
                     String username = sessions.get(socketIOClient.getSessionId());
                     handleExit(socketIOClient,room,username);
                 }
-                logger.info("DISCONNECT",socketIOClient.toString());
             }
         });
     }
@@ -120,7 +118,6 @@ public class SocketController {
         socketServer.addConnectListener(new ConnectListener() {
             @Override
             public void onConnect(SocketIOClient socketIOClient) {
-                logger.info("CONNECT",socketIOClient.getSessionId());
                 ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(1);
                 executor.scheduleAtFixedRate(() -> sendRoomsDTO(socketIOClient), 10, 15, TimeUnit.SECONDS);
                 executor.scheduleAtFixedRate(() -> sendRankingDTO(socketIOClient), 10, 15, TimeUnit.SECONDS);
@@ -181,7 +178,6 @@ public class SocketController {
     }
 
     public void CloseSocket(){
-        logger.info("CLOSE SOCKET");
         socketServer.stop();
     }
 }
