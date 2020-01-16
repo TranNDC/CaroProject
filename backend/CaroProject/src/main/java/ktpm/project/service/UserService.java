@@ -80,6 +80,8 @@ public class UserService implements UserDetailsService {
     public UserDTO getUserByUsername(String username) {
         UserDAO userDAO = userRepo.findFirstByUsername(username).orElse(null);
         if (userDAO == null) return null;
+        logger.warn(username);
+        logger.warn(String.valueOf(rankRepo.getRankByUsername(username)));
         return new UserDTO(userDAO,rankRepo.getRankByUsername(username));
     }
 

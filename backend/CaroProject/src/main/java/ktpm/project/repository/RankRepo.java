@@ -45,7 +45,7 @@ public class RankRepo {
 
 
     public long getRankByUsername(String username){
-        return redisTemplate.opsForZSet().rank(rankKey(),username);
+        return redisTemplate.opsForZSet().reverseRank(rankKey(),username);
 
     }
 
