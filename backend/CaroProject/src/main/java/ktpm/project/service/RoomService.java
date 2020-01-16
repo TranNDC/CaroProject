@@ -93,6 +93,7 @@ public class RoomService {
         Integer betPoints = roomDTO.getBetPoint()!=null?roomDTO.getBetPoint():0;
         roomDAO.setBetPoint(betPoints);
         String password = (roomDTO.getPassword()!=null && roomDTO.getPassword().length() != 0 )? passwordEncoder.encode(roomDTO.getPassword()) : "";
+        logger.warn("PASSWORD" + password);
         roomDAO.setPassword(password);
         roomDAO.setHost(roomDTO.getUsername());
         roomDAO.setName(roomDTO.getRoomName());
@@ -175,14 +176,17 @@ public class RoomService {
     }
 
     public RoomDTO JoinRoom(JoinFormDTO joinFormDTO) throws Exception {
-        ChangeMode(joinFormDTO.getRoomId(),WAITING);
+        logger.warn(joinFormDTO.getPassword());
         RoomDAO room = roomRepo.findById(Integer.valueOf(joinFormDTO.getRoomId())).orElse(null);
         CheckCanJoin(room,joinFormDTO.getUsername());
         if (!room.getPassword().equals("")) {
-            if (!passwordEncoder.matches(room.getPassword(),joinFormDTO.getPassword())){
+            logger.warn(room.getPassword());
+            logger.warn(joinFormDTO.getPassword());
+            if (!passwordEncoder.matches(joinFormDTO.getPassword(),room.getPassword())){
                 throw new IllegalAccessException("Password is incorrect");
             }
         }
+        ChangeMode(joinFormDTO.getRoomId(),WAITING);
         room.setGuest(joinFormDTO.getUsername());
         room.setGuestPoints(0);
         room.setGuestReady(1);
