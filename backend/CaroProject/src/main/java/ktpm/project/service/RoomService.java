@@ -249,7 +249,7 @@ public class RoomService {
         } else if (room.getGuest()!=null && room.getHost().equals(username)){
             room.setHostReady(1);
         }
-        if (isNotAvailable(room.getHost()) && isNotAvailable(room.getGuest()))
+        if (!isNotAvailable(room.getHost()) && !isNotAvailable(room.getGuest()))
             room.setMode(WAITING);
         else
             room.setMode(FREE);
@@ -295,6 +295,7 @@ public class RoomService {
         RoomDAO room = roomRepo.findById(Integer.valueOf(roomID)).orElse(null);
         if (room == null) return;
         HandleResult(room,username,result);
+        roomRepo.save(room);
     }
 
     private void HandleResult(RoomDAO room, String username, String result) {
@@ -308,6 +309,8 @@ public class RoomService {
             host.setPoints(host.getPoints()+DRAW_POINTS);
             userRepo.save(guest);
             userRepo.save(host);
+            room.setGuestPoints(room.getGuestPoints()+1);
+            room.setHostPoints(room.getHostPoints()+1);
         }else {
             UserDAO winner = (result.equals(WIN))? (guest.getUsername().equals(username) ?guest:host)
                     : (guest.getUsername().equals(username) ?host:guest);
@@ -318,6 +321,19 @@ public class RoomService {
 
             winner.setWinCount(winner.getWinCount()+1);
             loser.setLoseCount(loser.getLoseCount()+1);
+
+            if (host.getUsername().equals(winner.getUsername())){
+                room.setHostPoints(room.getHostPoints()+1);
+                room.setIsHostPlayFirst(1);
+            }
+
+            if (guest.getUsername().equals(winner.getUsername())){
+                room.setGuestPoints(room.getGuestPoints()+1);
+                room.setIsHostPlayFirst(0);
+            }
+
+            room.setMode(WAITING);
+
             userRepo.save(winner);
             userRepo.save(loser);
         }
