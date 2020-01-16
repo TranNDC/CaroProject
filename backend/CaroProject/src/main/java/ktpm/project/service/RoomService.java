@@ -112,6 +112,7 @@ public class RoomService {
         res.setGuestReady(false);
         res.setHostReady(true);
         res.setBackground(Utils.randomImage(nBackground));
+        logger.warn(res.getBackground());
         return res;
     }
 
@@ -139,6 +140,8 @@ public class RoomService {
         roomDTO.setIsHostPlayFirst(room.getIsHostPlayFirst()==1);
         roomDTO.setGuestReady(room.getGuestReady()==1);
         roomDTO.setHostReady(room.getHostReady()==1);
+        roomDTO.setBackground(Utils.randomImage(nBackground));
+
         return roomDTO;
     }
 
