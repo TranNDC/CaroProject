@@ -76,6 +76,20 @@ public class RoomService {
         }
     }
 
+    private void CheckCanContinue(RoomDAO room, String username) throws Exception{
+        if (room == null){
+            throw new ClassNotFoundException("Not found room");
+        }
+
+        UserDAO userDAO = userRepo.findFirstByUsername(username).orElse(null);
+        if (userDAO==null){
+            throw new Exception("Not found user");
+        }
+        if (userDAO.getPoints() < room.getBetPoint()){
+            throw new IllegalArgumentException("Make sure your points >= "+room.getBetPoint());
+        }
+    }
+
     public RoomDTO CreateNewRoom(CreateRoomForm roomDTO) throws Exception {
         logger.warn(String.valueOf(roomDTO));
         UserDAO host = userRepo.findFirstByUsername(roomDTO.getUsername()).orElse(null);
@@ -186,10 +200,11 @@ public class RoomService {
                 throw new IllegalAccessException("Password is incorrect");
             }
         }
-        ChangeMode(joinFormDTO.getRoomId(),WAITING);
+//        ChangeMode(joinFormDTO.getRoomId(),WAITING);
         room.setGuest(joinFormDTO.getUsername());
         room.setGuestPoints(0);
         room.setGuestReady(1);
+        room.setMode(WAITING);
         roomRepo.save(room);
         return toRoomDTO(room);
     }
@@ -227,8 +242,17 @@ public class RoomService {
 
     public RoomDTO Continue(String roomId, String username) throws Exception {
         RoomDAO room = roomRepo.findById(Integer.valueOf(roomId)).orElse(null);
-        CheckCanJoin(room,username);
-        ChangeHost(room);
+
+        CheckCanContinue(room,username);
+        if (room.getGuest()!= null && room.getGuest().equals(username)){
+            room.setGuestReady(1);
+        } else if (room.getGuest()!=null && room.getHost().equals(username)){
+            room.setHostReady(1);
+        }
+        if (isNotAvailable(room.getHost()) && isNotAvailable(room.getGuest()))
+            room.setMode(WAITING);
+        else
+            room.setMode(FREE);
 
         room = roomRepo.save(room);
         return toRoomDTO(room);
@@ -257,6 +281,10 @@ public class RoomService {
             logger.info("DELETE ROOM");
             roomRepo.delete(room);
         } else {
+            room.setHostReady(1);
+            room.setGuestPoints(0);
+            room.setHostPoints(0);
+            room.setIsHostPlayFirst(1);
             roomRepo.save(room);
         }
         return toRoomDTO(room);
@@ -281,15 +309,15 @@ public class RoomService {
             userRepo.save(guest);
             userRepo.save(host);
         }else {
-            UserDAO winner = (result.equals(WIN))? guest.getUsername().equals(username) ?guest:host
-                    : guest.getUsername().equals(username) ?host:guest;
-            UserDAO loser = (result.equals(WIN))? !guest.getUsername().equals(username) ?guest:host
-                    : !guest.getUsername().equals(username) ?host:guest;
+            UserDAO winner = (result.equals(WIN))? (guest.getUsername().equals(username) ?guest:host)
+                    : (guest.getUsername().equals(username) ?host:guest);
+            UserDAO loser = (result.equals(WIN))? (!guest.getUsername().equals(username) ?guest:host)
+                    : (!guest.getUsername().equals(username) ?host:guest);
             winner.setPoints(winner.getPoints()+WIN_POINTS+room.getBetPoint());
-            loser.setPoints(winner.getPoints()+LOSE_POINTS-room.getBetPoint());
+            loser.setPoints(loser.getPoints()+LOSE_POINTS-room.getBetPoint());
 
             winner.setWinCount(winner.getWinCount()+1);
-            winner.setLoseCount(winner.getLoseCount()+1);
+            loser.setLoseCount(loser.getLoseCount()+1);
             userRepo.save(winner);
             userRepo.save(loser);
         }

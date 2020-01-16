@@ -11,7 +11,6 @@ import ktpm.project.service.SocketService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.*;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -24,6 +23,7 @@ public class SocketController {
     @Autowired
     private SocketService socketService;
 
+    private Map<UUID,Set<String>> sessionRooms = new HashMap<>();
     private Map<UUID,String> sessions = new HashMap<>();
     SocketConfig socketConfig = new SocketConfig();
     public SocketController(){
@@ -49,13 +49,24 @@ public class SocketController {
             public void onData(SocketIOClient socketIOClient, CreateRoomForm createRoomForm, AckRequest ackRequest) throws Exception {
                 JoinResDTO joinResDTO = socketService.HandleCreateRoom(createRoomForm);
                 if (joinResDTO.getCode()==200){
+                    logger.warn(getRoomName(joinResDTO.getRoom().getId()));
                     socketIOClient.joinRoom(getRoomName(joinResDTO.getRoom().getId()));
+                    putRoomToMap(socketIOClient.getSessionId(),getRoomName(joinResDTO.getRoom().getId()));
                     sessions.put(socketIOClient.getSessionId(),createRoomForm.getUsername());
                 }
                 socketIOClient.sendEvent("listen-create",joinResDTO);
             }
         });
     }
+
+    private void putRoomToMap(UUID sessionId, String roomName) {
+        Set<String> rooms = sessionRooms.get(sessionId);
+        if (rooms == null || rooms.size() == 0)
+            rooms = new HashSet<>();
+        rooms.add(roomName);
+        sessionRooms.put(sessionId,rooms);
+    }
+
 
     private void addJoin() {
         socketServer.addEventListener("join", JoinFormDTO.class, new DataListener<JoinFormDTO>() {
@@ -65,6 +76,8 @@ public class SocketController {
                 socketIOClient.sendEvent("listen-join",joinResDTO);
                 if(joinResDTO.getCode()==200){
                     socketIOClient.joinRoom(getRoomName(joinFormDTO.getRoomId()));
+                    putRoomToMap(socketIOClient.getSessionId(),getRoomName(joinResDTO.getRoom().getId()));
+                    sessions.put(socketIOClient.getSessionId(),joinFormDTO.getUsername());
                     socketServer.getRoomOperations(getRoomName(joinFormDTO.getRoomId())).sendEvent("listen-guest-join",socketIOClient,joinResDTO.getRoom());
                 }
             }
@@ -81,9 +94,11 @@ public class SocketController {
         socketServer.addDisconnectListener(new DisconnectListener() {
             @Override
             public void onDisconnect(SocketIOClient socketIOClient) {
-                Set<String> rooms = socketIOClient.getAllRooms();
+                Set<String> rooms = sessionRooms.get(socketIOClient.getSessionId());
+                logger.warn(String.valueOf(rooms.size()));
                 for (String room:rooms){
                     String username = sessions.get(socketIOClient.getSessionId());
+                    logger.warn(username);
                     handleExit(socketIOClient,room,username);
                 }
             }
